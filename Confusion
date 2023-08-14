@@ -1,0 +1,45 @@
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
+class X extends Thread {
+	public void run() {
+		try {
+			String s="";
+			FileReader fr = new FileReader("E:/fileIo/abc.txt");
+			for (int i = 0; (i = fr.read()) != -1;) {
+				//System.out.print((char) i);
+				s=s+((char)i);
+			}
+			System.out.println(s);
+			fr.close();
+		} catch (Exception e) {
+			System.out.println("please try again");
+		}
+	}
+}
+
+class F extends Thread {
+	public void run() {
+		try {
+			
+			FileWriter fw = new FileWriter("E:/fileIo/abc.txt");
+			String a = "anto";
+			System.out.println(a);
+			fw.write(a);
+			fw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+}
+
+public class Confusion {
+
+	public static void main(String[] args) {
+		X x = new X();
+        F f = new F();
+		x.start();
+		f.start();
+	}
+}
