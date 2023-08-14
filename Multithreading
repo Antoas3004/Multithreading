@@ -1,0 +1,67 @@
+import java.io.FileReader;
+
+class A extends Thread {
+	public void run() {
+		try {
+			sleep(5000);
+			FileReader fr = new FileReader("E:\\fileIo\\anto.txt");
+			for (int i = 0; (i = fr.read()) != -1;) {
+				System.out.print((char) i);
+			}
+			fr.close();
+		} catch (Exception e) {
+			System.out.print("");
+		}
+	}
+}
+
+class B extends Thread {
+	public void run() {
+		try {
+			sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		int a = 0;
+		int b = 1;
+		System.out.println(a);
+		System.out.println(b);
+		for (int i = 1; i <= 10; i++) {
+			int c = a + b;
+			System.out.println(c);
+			a = b;
+			b = c;
+		}
+	}
+}
+
+class C extends Thread {
+	public void run() {
+		String s[] = { "java", "c++", "c#", "python", "scala", "Ruby" };
+		for (int i = 0; i < s.length; i++) {
+			for (int j = i + 1; j < s.length; j++) {
+				if (s[i].compareTo(s[j]) > 0) {
+					String temp = s[i];
+					s[i] = s[j];
+					s[j] = temp;
+				}
+			}
+		}
+		for (String i : s) {
+			System.out.println(i);
+		}
+	}
+}
+
+public class Mt {
+
+	public static void main(String[] args) {
+		A a = new A();
+		B b = new B();
+		C c = new C();
+		a.start();
+		b.start();
+		c.start();
+	}
+}
